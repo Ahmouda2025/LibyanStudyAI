@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat / الدردشة</title>
+</head>
+<body>
+  <h2>💬 Study AI - Chat / الدردشة</h2>
+  <p>Ask up to 5 free questions. / يمكنك طرح ٥ أسئلة مجانًا.</p>
+  <textarea id="q" placeholder="Type your question / اكتب سؤالك"></textarea><br>
+  <button onclick="ask()">Ask / إرسال</button>
+  <div id="answer"></div>
+  <p id="limitMsg"></p>
+  <a href="subscribe_manual.html">Subscribe / اشترك</a>
+
+<script>
+const MAX_FREE = 5;
+let used = parseInt(localStorage.getItem('usedQuestions') || '0');
+let paid = localStorage.getItem('isPaid') === 'true';
+
+function updateUI(){
+  if(!paid && used >= MAX_FREE){
+    document.getElementById('limitMsg').innerText = 'You used your 5 free questions. Please subscribe. / لقد استخدمت ٥ أسئلة مجانية. الرجاء الاشتراك.';
+  } else {
+    document.getElementById('limitMsg').innerText = '';
+  }
+}
+updateUI();
+
+function ask(){
+  if(!paid && used >= MAX_FREE){
+    updateUI();
+    return;
+  }
+  const question = document.getElementById('q').value.trim();
+  if(!question) return;
+  if(!paid){ used++; localStorage.setItem('usedQuestions', used); }
+  updateUI();
+  document.getElementById('answer').innerText = "🤖 Thinking / جاري التفكير...";
+  setTimeout(()=>{
+    document.getElementById('answer').innerText = "✅ This is where the AI answer will appear.\n✅ هنا ستظهر إجابة الذكاء الاصطناعي.";
+  }, 800);
+  document.getElementById('q').value = "";
+}
+</script>
+</body>
+</html>

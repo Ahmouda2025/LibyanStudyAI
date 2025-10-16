@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Subscribe / الاشتراك</title>
+</head>
+<body>
+  <h2>💳 Subscribe / الاشتراك</h2>
+  <p>Price: 25 LYD / month<br>السعر: 25 دينار شهريًا</p>
+  <p>Step 1: Pay to your teacher or admin.<br>الخطوة ١: ادفع للمسؤول أو المعلم.</p>
+  <p>Step 2: Enter the code you received.<br>الخطوة ٢: أدخل الرمز الذي حصلت عليه.</p>
+  <input id="code" placeholder="Enter Code / أدخل الرمز"><br>
+  <button onclick="activate()">Activate / تفعيل</button>
+
+<script>
+function activate(){
+  const code = document.getElementById('code').value.trim();
+  if(code === "PAID123"){
+    localStorage.setItem('isPaid','true');
+    localStorage.setItem('usedQuestions','0');
+    alert("✅ Subscription activated! / تم تفعيل الاشتراك!");
+    window.location.href = "chat.html";
+  } else {
+    alert("❌ Wrong code. / الرمز غير صحيح.");
+  }
+}
+</script>
+</body>
+</html>
